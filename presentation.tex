@@ -36,7 +36,71 @@
 \frame[plain]{\titlepage}	% Титульный слайд
 
 \begin{frame}
-\frametitle{Graph Neural Network}
+\frametitle{Graph Convolutional Network}
+Вид одного слоя
+\begin{figure}
+	% \includegraphics[width=\columnwidth]{message_propagation.png}
+	\includegraphics[width=\columnwidth]{fromula1.png}
+\end{figure}
+\begin{itemize}
+	\item $\Psi$ --- permutation-invariant функция
+	\item $\phi^{l + 1}$ и $\psi^{l + 1}$ --- некоторый функция на $l$-ом слое
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Graph Convolutional Network}
+\begin{figure}
+	\includegraphics[width=0.8\columnwidth]{formula2.png}
+\end{figure}
+\begin{itemize}
+	\item $\sigma$ --- сигмоида
+	\item $W^{l + 1}$ --- обучаемая матрица
+	\item $L_{uv}$ --- нормированный Лаплассиан
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Sampling}
+\begin{multicols}{2}
+Виды
+\begin{itemize}
+	\item Для каждой вершины выбираем случайное подмножество соседних, которые будут влиять на новое значение $h_v$. (GraphSAGE).
+	\item Выбирать случайное множество вершин всего графа и обучаться только на полученном ими подграфе (FastGCN).
+\end{itemize}
+	
+\columnbreak
+	\begin{figure}
+		\includegraphics[width=\columnwidth]{sampling.png}
+	\end{figure}
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+\frametitle{Pooling}
+\begin{figure}
+	\includegraphics[width=\columnwidth]{pooling.png}
+\end{figure}
+\begin{itemize}
+	\item Сжатие кластеров вершин в одну
+	\item Уменьшает размеры графа
+	\item Уменьшает вычислительную стоимость
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Differentiable Pooling}
+\begin{itemize}
+	\item Обучаем для каждой вершины попадание в кластера
+\begin{figure}
+	\includegraphics[width=0.5\columnwidth]{softmax.png}
+\end{figure}
+	\item Пересчитываются embedding для новых вершин, и новая матрица смежности
+	\begin{figure}
+		\includegraphics[width=0.8\columnwidth]{differentaible_pooling.png}
+	\end{figure}
+	\item Новая матрица смежности оказывается полной
+\end{itemize}
 \end{frame}
 
 \begin{frame}[c]
