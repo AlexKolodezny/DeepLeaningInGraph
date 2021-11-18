@@ -1,0 +1,62 @@
+%!TEX TS-program = xelatex
+\documentclass{beamer}
+
+\usepackage[linesnumbered,lined,boxed,commentsnumbered]{algorithm2e}
+
+%%% Работа с русским языком и шрифтами
+\usepackage[english,russian]{babel}   % загружает пакет многоязыковой вёрстки
+\usepackage{fontspec}      % подготавливает загрузку шрифтов Open Type, True Type и др.
+\defaultfontfeatures{Ligatures={TeX},Renderer=Basic}  % свойства шрифтов по умолчанию
+\setmainfont[Ligatures={TeX,Historic}]{Myriad Pro} %  установите шрифты Myriad Pro или (при невозможности) замените здесь на другой шрифт, который есть в системе — например, Arial
+\setsansfont{Myriad Pro}  %  установите шрифты Myriad Pro или (при невозможности) замените здесь на другой шрифт, который есть в системе — например, Arial
+\setmonofont{Courier New}
+\uselanguage{russian}
+\languagepath{russian}
+\deftranslation[to=russian]{Theorem}{Теорема}
+\deftranslation[to=russian]{Definition}{Определение}
+\deftranslation[to=russian]{Definitions}{Определения}
+\deftranslation[to=russian]{Corollary}{Следствие}
+\deftranslation[to=russian]{Fact}{Факт}
+\deftranslation[to=russian]{Example}{Пример}
+\deftranslation[to=russian]{Examples}{Примеры}
+
+\usepackage{multicol} 		% Несколько колонок
+\graphicspath{{images/}}  	% Папка с картинками
+\usepackage{subcaption}
+
+%%% Информация об авторе и выступлении
+\title[Заголовок]{Графовые свёрточные нейронные сети} 
+% \subtitle{Подзаголовок презентации / Название конференции}
+\author[Александр Колодезный]{Александр Колодезный БПМИ192}
+\institute[Высшая школа экономики]{Национальный исследовательский университет \\ «Высшая школа экономики» (Москва)}
+\date{23 ноября 2021 г.}
+
+\begin{document}	% Начало презентации
+
+\frame[plain]{\titlepage}	% Титульный слайд
+
+\begin{frame}
+\frametitle{Graph Neural Network}
+\end{frame}
+
+\begin{frame}[c]
+\begin{center}
+\frametitle{\LARGE Спасибо за внимание!}
+
+{\LARGE \inserttitle}
+
+\bigskip
+
+{\insertauthor} 
+
+\bigskip\bigskip
+
+{\insertinstitute}
+
+\bigskip\bigskip
+
+{\large \insertdate}
+\end{center}
+\end{frame}
+
+\end{document}
