@@ -24,6 +24,9 @@
 \graphicspath{{images/}}  	% Папка с картинками
 \usepackage{subcaption}
 
+\usepackage{hyperref}
+\urlstyle{same}
+
 %%% Информация об авторе и выступлении
 \title[Заголовок]{Графовые свёрточные нейронные сети} 
 % \subtitle{Подзаголовок презентации / Название конференции}
@@ -103,24 +106,82 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}[c]
-\begin{center}
-\frametitle{\LARGE Спасибо за внимание!}
-
-{\LARGE \inserttitle}
-
-\bigskip
-
-{\insertauthor} 
-
-\bigskip\bigskip
-
-{\insertinstitute}
-
-\bigskip\bigskip
-
-{\large \insertdate}
-\end{center}
+\begin{frame}
+\frametitle{Top-k Pooling}
+\begin{itemize}
+	\item Для каждой вершины посчитаем attention как проекция его эмбединга на обучаемый вектор $p$
+	\begin{figure}
+		\includegraphics[width=0.3\columnwidth]{top-k_pooing.png}
+	\end{figure}
+	\item Выбираем $k$ вершин с наибольшим полученным attention
+	\item Оставляем м графе только найденные вершины
+	\item Расширение метода Self-attention pooling
+	\begin{figure}
+		\includegraphics[width=0.5\columnwidth]{self-attention_pooing.png}
+	\end{figure}
+\end{itemize}
 \end{frame}
+
+\begin{frame}
+\frametitle{Другие методы pooling-а}
+\begin{itemize}
+	\item Edge pooling --- выбираем ребро, которое сжимаем
+	\begin{figure}
+		\includegraphics[width=0.7\columnwidth]{edge_pooling.png}
+	\end{figure}
+	\item Топологические виды pooling-а
+	\begin{itemize}
+		\item GRACLUS --- алгоритм основанный на спектральной кластеризации
+		\item Non-negative Factorization Matrix Pooling --- pooling основанный на NFM факторизации матрицы смежности.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Graph embedding}
+\begin{itemize}
+	\item Хотим построить embedding для всего графа
+	\item Нужно агрегировать embedding для нод
+	\item Можно делать polling графа, пока не останется одна вершина
+	\item Применить перестановочно-инвариантную функцию от всех нод
+	\begin{figure}
+		\includegraphics[width=0.5\columnwidth]{graph_classification.png}
+	\end{figure}
+	\item Выбрать $\Psi$ как сумму, максимум или минимум, а $f$ --- тождественную функцию.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Список литературы}
+\begin{itemize}
+	\item \url{https://arxiv.org/pdf/1912.12693.pdf}
+	\item \url{https://arxiv.org/pdf/1609.02907.pdf}
+	\item \url{https://arxiv.org/pdf/1812.04202.pdf}
+	\item \url{https://arxiv.org/pdf/1801.10247.pdf}
+	\item \url{https://arxiv.org/pdf/1706.02216.pdf}
+\end{itemize}
+\end{frame}
+
+
+
+% \begin{frame}[c]
+% \begin{center}
+% \frametitle{\LARGE Спасибо за внимание!}
+
+% {\LARGE \inserttitle}
+
+% \bigskip
+
+% {\insertauthor} 
+
+% \bigskip\bigskip
+
+% {\insertinstitute}
+
+% \bigskip\bigskip
+
+% {\large \insertdate}
+% \end{center}
+% \end{frame}
 
 \end{document}
