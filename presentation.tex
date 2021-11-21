@@ -28,7 +28,7 @@
 \urlstyle{same}
 
 %%% Информация об авторе и выступлении
-\title[Заголовок]{Графовые свёрточные нейронные сети} 
+\title[Заголовок]{Слои в графовых свёрточных сети} 
 % \subtitle{Подзаголовок презентации / Название конференции}
 \author[Александр Колодезный]{Александр Колодезный БПМИ192}
 \institute[Высшая школа экономики]{Национальный исследовательский университет \\ «Высшая школа экономики» (Москва)}
@@ -38,32 +38,33 @@
 
 \frame[plain]{\titlepage}	% Титульный слайд
 
-\begin{frame}
-\frametitle{Graph Convolutional Network}
-\begin{figure}
-	\includegraphics[width=0.7\columnwidth]{message_propagation.png}
-\end{figure}
-Вид одного свёрточного слоя
-\begin{figure}
-	\includegraphics[width=0.8\columnwidth]{fromula1.png}
-\end{figure}
-\begin{itemize}
-	\item $\Psi$ --- permutation-invariant функция
-	\item $\phi^{l + 1}$ и $\psi^{l + 1}$ --- некоторый функция на $l$-ом слое
-\end{itemize}
-\end{frame}
+% \begin{frame}
+% \frametitle{Graph Convolutional Network}
+% \begin{figure}
+% 	\includegraphics[width=0.7\columnwidth]{message_propagation.png}
+% \end{figure}
+% Вид одного свёрточного слоя
+% \begin{figure}
+% 	\includegraphics[width=0.8\columnwidth]{fromula1.png}
+% \end{figure}
+% \begin{itemize}
+% 	\item $\Psi$ --- permutation-invariant функция
+% 	\item $\phi^{l + 1}$ и $\psi^{l + 1}$ --- некоторый функция на $l$-ом слое
+% \end{itemize}
+% \end{frame}
 
-\begin{frame}
-\frametitle{Graph Convolutional Network}
-\begin{figure}
-	\includegraphics[width=0.8\columnwidth]{formula2.png}
-\end{figure}
-\begin{itemize}
-	\item $\sigma$ --- сигмоида
-	\item $W^{l + 1}$ --- обучаемая матрица
-	\item $L_{uv}$ --- нормированный Лаплассиан
-\end{itemize}
-\end{frame}
+% \begin{frame}
+% \frametitle{Graph Convolutional Network}
+% \begin{figure}
+% 	\includegraphics[width=0.8\columnwidth]{formula2.png}
+% \end{figure}
+% \begin{itemize}
+% 	\item $\sigma$ --- сигмоида
+% 	\item $W^{l + 1}$ --- обучаемая матрица
+% 	\item $L_{uv}$ --- нормированный Лаплассиан
+% \end{itemize}
+% \end{frame}
+
 
 \begin{frame}
 \frametitle{Обработка рёбер}
