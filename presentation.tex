@@ -40,10 +40,12 @@
 
 \begin{frame}
 \frametitle{Graph Convolutional Network}
-Вид одного слоя
 \begin{figure}
-	% \includegraphics[width=\columnwidth]{message_propagation.png}
-	\includegraphics[width=\columnwidth]{fromula1.png}
+	\includegraphics[width=0.7\columnwidth]{message_propagation.png}
+\end{figure}
+Вид одного свёрточного слоя
+\begin{figure}
+	\includegraphics[width=0.8\columnwidth]{fromula1.png}
 \end{figure}
 \begin{itemize}
 	\item $\Psi$ --- permutation-invariant функция
@@ -64,12 +66,48 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Sampling}
-\begin{multicols}{2}
-Виды
+\frametitle{Attention}
 \begin{itemize}
-	\item Для каждой вершины выбираем случайное подмножество соседних, которые будут влиять на новое значение $h_v$. (GraphSAGE).
-	\item Выбирать случайное множество вершин всего графа и обучаться только на полученном ими подграфе (FastGCN).
+	\item Добавление дополнительных обучаемых весов на рёбра $\alpha_{uv}^{l + 1}$
+\begin{figure}
+	\includegraphics[width=0.8\columnwidth]{attention.png}
+\end{figure}
+	\item Вычисляем сначала attention coefficient
+\begin{figure}
+	\includegraphics[width=0.9\columnwidth]{attention_coefficient.png}
+\end{figure}
+	\item Считаем softmax
+\begin{figure}
+	\includegraphics[width=0.5\columnwidth]{attention_softmax.png}
+\end{figure}
+	
+	
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Sampling (GraphSAGE)}
+\begin{multicols}{2}
+\begin{itemize}
+	\item Проблема --- много вычислений на плотных графах
+	\item Для каждой вершины на каждом слое выбираем случайное подмножество соседних вершин.
+	\item Пересчитываем $h_v$ только от $h_u$, которые выбрали.
+	\item Приходится пересчитывать градиенты для всех вершин.
+\end{itemize}
+\columnbreak
+	\begin{figure}
+		\includegraphics[width=\columnwidth]{sampling.png}
+	\end{figure}
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+\frametitle{Sampling (FastGCN)}
+\begin{multicols}{2}
+\begin{itemize}
+	\item Выбираем случайное подмножество вершин графа
+	\item Оставляем в графе только выбранные вершины и рёбра между ними 
+	\item Рассматриваем при обучении модель только выбранные вершины.
 \end{itemize}
 	
 \columnbreak
@@ -85,7 +123,7 @@
 	\includegraphics[width=\columnwidth]{pooling.png}
 \end{figure}
 \begin{itemize}
-	\item Сжатие кластеров вершин в одну
+	\item Сжатие кластеров похожих вершин в одну
 	\item Уменьшает размеры графа
 	\item Уменьшает вычислительную стоимость
 \end{itemize}
@@ -114,7 +152,7 @@
 		\includegraphics[width=0.3\columnwidth]{top-k_pooing.png}
 	\end{figure}
 	\item Выбираем $k$ вершин с наибольшим полученным attention
-	\item Оставляем м графе только найденные вершины
+	\item Оставляем в графе только найденные вершины
 	\item Расширение метода Self-attention pooling
 	\begin{figure}
 		\includegraphics[width=0.5\columnwidth]{self-attention_pooing.png}
@@ -123,32 +161,59 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Другие методы pooling-а}
+\frametitle{Edge Pooling}
 \begin{itemize}
-	\item Edge pooling --- выбираем ребро, которое сжимаем
+	\item Считаем attention для рёбер
 	\begin{figure}
 		\includegraphics[width=0.7\columnwidth]{edge_pooling.png}
 	\end{figure}
-	\item Топологические виды pooling-а
-	\begin{itemize}
-		\item GRACLUS --- алгоритм основанный на спектральной кластеризации
-		\item Non-negative Factorization Matrix Pooling --- pooling основанный на NFM факторизации матрицы смежности.
-	\end{itemize}
+	\item Сжимаем две вершины, соединённые этим ребром в одну
+	\item Повторяем итерационно
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Топологические pooling-и}
+\begin{itemize}
+	\item GRACLUS --- алгоритм основанный на спектральной кластеризации
+	\item Non-negative Factorization Matrix Pooling --- pooling основанный на NFM факторизации матрицы смежности.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Graph embedding}
+\begin{figure}
+	\includegraphics[width=\columnwidth]{moleculs.png}
+\end{figure}
 \begin{itemize}
 	\item Хотим построить embedding для всего графа
 	\item Нужно агрегировать embedding для нод
 	\item Можно делать polling графа, пока не останется одна вершина
-	\item Применить перестановочно-инвариантную функцию от всех нод
-	\begin{figure}
-		\includegraphics[width=0.5\columnwidth]{graph_classification.png}
-	\end{figure}
-	\item Выбрать $\Psi$ как сумму, максимум или минимум, а $f$ --- тождественную функцию.
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Graph embedding}
+\begin{multicols}{2}
+\begin{figure}
+	\includegraphics[width=\columnwidth]{graph_classification.png}
+\end{figure}
+\begin{itemize}
+	\item Выбрать $\Psi$ как сумму, максимум или минимум, а $f$ --- тождественную функцию.
+	\item $f$ как нейронная сеть
+\end{itemize}
+\columnbreak
+\begin{figure}
+	\includegraphics[width=\columnwidth]{graph_aggregation.png}
+\end{figure}
+	
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}
+		\includegraphics[width=\columnwidth]{network.png}
+	\end{figure}
 \end{frame}
 
 \begin{frame}
